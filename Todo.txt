@@ -49,10 +49,7 @@ Funktioner:
 
 
 
-
-
-
 Todo: 
 * Skapa en loop som kör kör programmet och fortsätter trots inputs.
 * Skapa de olika värden som användaren har till sitt förfogande.
-
+* Kontrollera om jag gjort rätt gällande 2D array board

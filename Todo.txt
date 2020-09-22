@@ -23,8 +23,8 @@ static bool[,] boobyTraps;
 GameEngine.cs (Logik, booleans om man vunnit eller inte?) 
 Funktioner: 
 public 
-public static string Winning(string win) // Funktionen är klar, ska bara bindas ihop med logik
-public static string Lost(string lost) // Funktionen är klar, ska bara bindas ihop med logik
+public void  Winning() // Funktionen är klar, ska bara bindas ihop med logik
+public void  Lost() // Funktionen är klar, ska bara bindas ihop med logik
 Variabler: 
 bool IsWinning; <--- binder vi ihop med funktionen winnning och logiken
 bool IsLoosing; <--- binder vi ihop med funktionen lost och logiken

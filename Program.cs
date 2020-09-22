@@ -17,10 +17,6 @@ namespace MineSweeper
             // var boobyRowAndCol = Helper.BoobyTrapped(10, 10);
 
 
-            GameEngine.Winning();
-            GameEngine.Lost();
-
-
 
         }
     }

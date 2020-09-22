@@ -9,11 +9,11 @@ namespace MineSweeper
 
 
 
-        public static void Lost()
+        public void Lost()
         {
             Console.Write("You Lost");
         }
-        public static void Winning()
+        public void Winning()
         {
             Console.Write("You Won!");
         }

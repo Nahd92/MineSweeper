@@ -6,7 +6,9 @@ namespace MineSweeper
     {
         static void Main(string[] args)
         {
-            System.Console.WriteLine("ändingar");
+            System.Console.WriteLine("Hejhejehej");
+
+            System.Console.WriteLine("Hejhejehej");
         }
     }
 }

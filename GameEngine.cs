@@ -12,8 +12,24 @@ namespace MineSweeper
         {
             Board board = new Board();
             board.DrawBoard();
+        }
+
+        public void StartGame()  //Agera hjärta och inneha all logik till spelet. 
+        {
+            GenerateBoard();
+
 
         }
+
+
+
+
+
+
+
+
+
+
 
 
         public void Lost()

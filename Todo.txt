@@ -2,7 +2,8 @@ Dela upp arbetet mellan oss två på lördag.
 
 
 Program.cs 
-Funktioner: 
+Funktioner:
+ 
 Variabler: 
 <----------------------------------> Ej Klar
 
@@ -12,6 +13,7 @@ Helper.cs
 Funktioner: 
 public static void Initialize(string[] args)
 public static bool BoobyTrapped(int row, int column)
+
 Variabler: 
 const int TOTAL_NUMBER_MINES = 10;
 static Random random;
@@ -20,11 +22,13 @@ static bool[,] boobyTraps;
 
 
 
-GameEngine.cs (Logik, booleans om man vunnit eller inte?) 
+GameEngine.cs (Logik, booleans om man vunnit eller inte, m.m) 
 Funktioner: 
-public 
+public void GenerateBoard() // <----- Har hämtat board från board.cs.
+public void NewGame()   // <--- Funktionen ska agera hjärtat och inneha all logik för att spelet ska fungera.
 public void  Winning() // Funktionen är klar, ska bara bindas ihop med logik
 public void  Lost() // Funktionen är klar, ska bara bindas ihop med logik
+
 Variabler: 
 bool IsWinning; <--- binder vi ihop med funktionen winnning och logiken
 bool IsLoosing; <--- binder vi ihop med funktionen lost och logiken
@@ -38,7 +42,14 @@ Board.cs  (Hur sammanstrålar vi med Helper och minorna?)
 Funktioner: 
 public static void Drawboard(int[,] board) 
 
+
+
 Variabler: 
+string[] header = { " ", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
+int[] numbers = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+string borderHorizontal = "   +--------------------";
+string borderVertical = "|";
+
 <----------------------------------> Ej Klar
 
 
@@ -49,7 +60,12 @@ Funktioner:
 
 
 
-Todo: 
-* Skapa en loop som kör kör programmet och fortsätter trots inputs.
-* Skapa de olika värden som användaren har till sitt förfogande.
-* Kontrollera om jag gjort rätt gällande 2D array board
+
+
+ToDo: 
+* Skapa en (Do while) loop som kör kör programmet och fortsätter trots inputs.
+* Kolla hur vi gör för att användaren ska kunna ändra i boarden och få den nya uppdaterade i loopen.
+* Skapa de olika värden som användaren har till sitt förfogande. (Få ihop dessa med 2D array på något sätt).
+* Kontrollera om jag gjort rätt gällande 2D array board.
+* Kolla hur vi ska få Helper att arbeta med vår GameEngine.
+* Kontrollera hur man får ut Adjan

@@ -9,13 +9,19 @@ namespace MineSweeper
     class Program
     {
 
+
         static void Main(string[] args)
         {
             var Engine = new GameEngine();
-            // Helper.Initialize(string[] args);
-            // var boobyRowAndCol = Helper.BoobyTrapped(10, 10);
-            //Tar fram boarden.  
-            Engine.GenerateBoard();
+            //  Helper.Initialize();
+            //  Helper.BoobyTrapped();
+
+
+            // Denna funktion startar spelet.
+            Engine.StartGame();
+
+
+
 
 
 

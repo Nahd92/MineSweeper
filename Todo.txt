@@ -1,0 +1,58 @@
+Dela upp arbetet mellan oss två på lördag.
+
+
+Program.cs 
+Funktioner: 
+Variabler: 
+<----------------------------------> Ej Klar
+
+
+
+Helper.cs 
+Funktioner: 
+public static void Initialize(string[] args)
+public static bool BoobyTrapped(int row, int column)
+Variabler: 
+const int TOTAL_NUMBER_MINES = 10;
+static Random random;
+static bool[,] boobyTraps;
+<----------------------------------> Klar
+
+
+
+GameEngine.cs (Logik, booleans om man vunnit eller inte?) 
+Funktioner: 
+public 
+public static string Winning(string win) // Funktionen är klar, ska bara bindas ihop med logik
+public static string Lost(string lost) // Funktionen är klar, ska bara bindas ihop med logik
+Variabler: 
+bool IsWinning; <--- binder vi ihop med funktionen winnning och logiken
+bool IsLoosing; <--- binder vi ihop med funktionen lost och logiken
+
+
+
+
+<----------------------------------> Ej Klar
+
+Board.cs  (Hur sammanstrålar vi med Helper och minorna?)
+Funktioner: 
+public static void Drawboard(int[,] board) 
+
+Variabler: 
+<----------------------------------> Ej Klar
+
+
+
+
+
+Funktioner: 
+
+
+
+
+
+
+Todo: 
+* Skapa en loop som kör kör programmet och fortsätter trots inputs.
+* Skapa de olika värden som användaren har till sitt förfogande.
+

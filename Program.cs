@@ -2,14 +2,26 @@
 
 namespace MineSweeper
 {
+    /// <summary>
+    /// Inlämningsarbetet 'MineSweeper' är skapat av Dhan och Felix Kristoffersson.
+    /// </summary>
+
+
+
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Jag kastar sten");
-            System.Console.WriteLine("Hejhejehej");
 
-            System.Console.WriteLine("Hejhejehej");
+            // Helper.Initialize(string[] args);
+            // var boobyRowAndCol = Helper.BoobyTrapped(10, 10);
+
+
+            GameEngine.Winning();
+            GameEngine.Lost();
+
+
+
         }
     }
 }

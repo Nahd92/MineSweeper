@@ -1,12 +1,12 @@
 using System;
-​
+
 namespace MineSweeper
 {
     public class Helper
     {
         const int TOTAL_NUMBER_MINES = 10;
         static Random random;
-        static bool[,] boobyTraps;​
+        static bool[,] boobyTraps;
 
         public static void Initialize(string[] args)
         {
@@ -15,7 +15,6 @@ namespace MineSweeper
                 string arg0 = args[0];
                 int seed;
                 bool success = int.TryParse(arg0, out seed);
-​
                 if (success)
                 {
                     random = new Random(seed);
@@ -25,24 +24,20 @@ namespace MineSweeper
             {
                 random = new Random();
             }
-​
             boobyTraps = new bool[10, 10];
-​
             int nrPlacedMines = 0;
             while (nrPlacedMines < 10)
             {
                 int row = random.Next(0, 10);
                 int column = random.Next(0, 10);
-​
+
                 if (!boobyTraps[row, column])
                 {
                     boobyTraps[row, column] = true;
                     nrPlacedMines++;
                 }
-​
             }
-        }​
-
+        }
         public static bool BoobyTrapped(int row, int column)
         {
             if (row >= 0 && row < boobyTraps.GetLength(1) &&
@@ -50,8 +45,7 @@ namespace MineSweeper
             {
                 return boobyTraps[column, row];
             }
-​
-           return false;
+            return false;
         }
     }
 }

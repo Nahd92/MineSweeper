@@ -6,6 +6,9 @@ namespace MineSweeper
     {
         bool IsWinning = false;
         bool IsLosing = false;
+        bool[,] usersInput;
+
+
 
         //Tar fram boarden.  
         public void GenerateBoard()
@@ -14,11 +17,12 @@ namespace MineSweeper
             board.DrawBoard();
         }
 
-        public void StartGame()  //Agera hjärta och inneha all logik till spelet. 
+
+
+        //Agera hjärta och inneha all logik till spelet. 
+        public void StartGame()
         {
             GenerateBoard();
-
-
         }
 
 

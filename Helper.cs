@@ -1,6 +1,6 @@
 using System;
 ​
-namespace TestApplication
+namespace MineSweeper
 {
     public class Helper
     {
@@ -42,7 +42,7 @@ namespace TestApplication
 ​
             }
         }​
-        
+
         public static bool BoobyTrapped(int row, int column)
         {
             if (row >= 0 && row < boobyTraps.GetLength(1) &&

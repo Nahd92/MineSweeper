@@ -4,7 +4,6 @@ namespace MineSweeper
 {
     public class Board
     {
-
         public void DrawBoard()
         {
             string[] header = { " ", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };

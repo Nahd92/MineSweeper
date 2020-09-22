@@ -22,7 +22,14 @@ namespace MineSweeper
         //Agera hjärta och inneha all logik till spelet. 
         public void StartGame()
         {
-            GenerateBoard();
+            do
+            {
+                GenerateBoard();
+                
+            } while (IsWinning);
+
+
+
         }
 
 

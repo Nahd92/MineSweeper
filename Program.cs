@@ -9,7 +9,6 @@ namespace MineSweeper
     class Program
     {
 
-
         static void Main(string[] args)
         {
             var gameEngine = new GameEngine();

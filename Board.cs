@@ -2,17 +2,33 @@ using System;
 
 namespace MineSweeper
 {
-    public class Board
+    public enum Col
+    {
+        A = 0,
+        B = 1,
+        C = 2,
+        D = 3,
+        E = 4,
+        F = 5,
+        G = 6,
+        H = 7,
+        I = 8,
+        J = 9
+    }
+
+
+    public struct Board
     {
 
         //Dom andra klasserna behöver inte känna till dessa variabler och arrays.
-        private string[] header = { " ", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
-        private int[] numbers = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        private string borderHorizontal = "   +--------------------";
-        private string borderVertical = "|";
-        private string[,] board = new string[10, 10];
-        int[] row = new int[10] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        int[] col = new int[10] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        static readonly string[] header = { " ", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
+        static private readonly int[] numbers = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        static private readonly string borderHorizontal = "   +--------------------";
+        static private readonly string borderVertical = "|";
+        static private string[,] board = new string[10, 10];
+        static private int[] row = new int[10] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        static private Col[] col = new Col[10] { Col.A, Col.B, Col.C, Col.D, Col.E, Col.F, Col.G, Col.H, Col.I, Col.J };
+        static string crossSymbol = "X";
 
 
         public void DisplayBoard()
@@ -39,8 +55,6 @@ namespace MineSweeper
                 Console.Write("\n");
             }
         }
-
-
         public void FillBoard()
         {
             //Fill the data 
@@ -48,7 +62,7 @@ namespace MineSweeper
             {
                 for (int j = 0; j < col.Length; j++)
                 {
-                    board[row[i], col[j]] = "X";
+                    board[row[i], (int)col[j]] = crossSymbol;
                 }
             }
         }

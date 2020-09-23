@@ -2,31 +2,29 @@ using System;
 
 namespace MineSweeper
 {
-    public class GameEngine
+    public struct GameEngine
     {
-        bool IsWinning = false;
-        bool IsLosing = false;
-        bool[,] usersInput;
-
+        static bool IsWinning = false;
+        static bool IsLosing = false;
 
 
         //Tar fram boarden.  
         public void GenerateBoard()
         {
             Board board = new Board();
-            board.DisplayBoard();
-        }
 
+            board.DisplayBoard();
+            board.FillBoard();
+        }
 
 
         //Agera hjärta och inneha all logik till spelet. 
         public void StartGame()
         {
-            do
-            {
-                GenerateBoard();
 
-            } while (IsWinning);
+            GenerateBoard();
+
+
 
 
 

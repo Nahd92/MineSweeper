@@ -14,7 +14,7 @@ namespace MineSweeper
         public void GenerateBoard()
         {
             Board board = new Board();
-            board.DrawBoard();
+            board.DisplayBoard();
         }
 
 
@@ -25,7 +25,7 @@ namespace MineSweeper
             do
             {
                 GenerateBoard();
-                
+
             } while (IsWinning);
 
 

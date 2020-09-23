@@ -19,7 +19,6 @@ namespace MineSweeper
 
     public struct Board
     {
-
         //Dom andra klasserna behöver inte känna till dessa variabler och arrays.
         static readonly string[] header = { " ", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
         static private readonly int[] numbers = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -29,7 +28,6 @@ namespace MineSweeper
         static private int[] row = new int[10] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         static private Col[] col = new Col[10] { Col.A, Col.B, Col.C, Col.D, Col.E, Col.F, Col.G, Col.H, Col.I, Col.J };
         static string crossSymbol = "X";
-
 
         public static void DisplayBoard()
         {

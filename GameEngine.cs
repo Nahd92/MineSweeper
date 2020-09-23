@@ -9,17 +9,15 @@ namespace MineSweeper
 
 
         //Tar fram boarden.  
-        static void GenerateBoard()
+        public void GenerateBoard()
         {
-            Board board = new Board();
-
             Board.DisplayBoard();
             Board.FillBoard();
         }
 
 
         //Agera hjärta och inneha all logik till spelet. 
-        public static void StartGame()
+        public void StartGame()
         {
             GenerateBoard();
 

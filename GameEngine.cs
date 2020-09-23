@@ -9,19 +9,18 @@ namespace MineSweeper
 
 
         //Tar fram boarden.  
-        public void GenerateBoard()
+        static void GenerateBoard()
         {
             Board board = new Board();
 
-            board.DisplayBoard();
-            board.FillBoard();
+            Board.DisplayBoard();
+            Board.FillBoard();
         }
 
 
         //Agera hjärta och inneha all logik till spelet. 
-        public void StartGame()
+        public static void StartGame()
         {
-
             GenerateBoard();
 
 
@@ -41,11 +40,11 @@ namespace MineSweeper
 
 
 
-        public void Lost()
+        public static void Lost()
         {
             Console.Write("You Lost");
         }
-        public void Winning()
+        public static void Winning()
         {
             Console.Write("You Won!");
         }

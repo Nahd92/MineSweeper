@@ -31,7 +31,7 @@ namespace MineSweeper
         static string crossSymbol = "X";
 
 
-        public void DisplayBoard()
+        public static void DisplayBoard()
         {
             //Displayed the filled Array
             FillBoard();
@@ -47,7 +47,7 @@ namespace MineSweeper
 
             for (int i = 0; i < board.GetLength(0); i++)
             {
-                Console.Write(" " + numbers[i] + " " + borderVertical);
+                Console.Write(" " + numbers[i] + " " + borderVertical);  // Denna skapar | och numrena i vertikal riktning bredvid X 
                 for (int j = 0; j < board.GetLength(1); j++)
                 {
                     Console.Write(" " + board[i, j]);
@@ -55,7 +55,7 @@ namespace MineSweeper
                 Console.Write("\n");
             }
         }
-        public void FillBoard()
+        public static void FillBoard()
         {
             //Fill the data 
             for (int i = 0; i < row.Length; i++)

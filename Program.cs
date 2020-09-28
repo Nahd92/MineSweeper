@@ -11,13 +11,13 @@ namespace MineSweeper
 
         static void Main(string[] args)
         {
-            var gameEngine = new GameEngine();
+            var gameEngine = new GameEngine(args);
             //  Helper.Initialize();
             //  Helper.BoobyTrapped();
 
 
             // Denna funktion startar spelet.
-            gameEngine.StartGame();
+            gameEngine.Run();
 
 
 

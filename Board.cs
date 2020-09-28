@@ -7,13 +7,13 @@ namespace MineSweeper
     // Typ för spelplanen i minröj.
     struct Board
     {
-        private Square[,] board;
+        Square[,] board;
         private int flagCount, sweepedCount;
 
         // Konstruktor som initaliserar en ny spelplan.
         public Board(string[] args) // Stubbe
         {
-            board = null;
+            board = new Square[10, 10];
             flagCount = 0;
             sweepedCount = 0;
         }
@@ -40,6 +40,18 @@ namespace MineSweeper
         // Skriv ut spelplanen till konsolen.
         public void Print() // Stubbe
         {
+            //Fill the data 
+            Console.WriteLine("    A B C D E F G H I J ");
+            Console.WriteLine("   +--------------------");
+            for (int row = 0; row < 10; row++)
+            {
+                Console.Write($" {row} |");
+                for (int col = 0; col < 10; col++)
+                {
+                    Console.Write(" " + board[row, col].Symbol);
+                }
+                Console.WriteLine();
+            }
         }
     }
 }

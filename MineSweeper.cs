@@ -15,6 +15,7 @@ namespace MineSweeper
         {
             board = new Board(args);
             quit = false;
+
         }
 
         // Läs ett nytt kommando från användaren med giltig syntax och 
@@ -35,6 +36,7 @@ namespace MineSweeper
             {
                 // Skriv klart spelloopen här
                 Console.WriteLine("Skriv färdigt spelet!");
+                board.Print();
                 break;
             }
         }

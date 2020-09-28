@@ -54,7 +54,11 @@ namespace MineSweeper
         // röjer en minerad ruta 
         public bool GameOver
         {
-            set { } // Stubbe
+            set
+            {
+
+
+            } // Stubbe
         }
 
         // Öka räknaren av minor på intilliggande rutor med 1.

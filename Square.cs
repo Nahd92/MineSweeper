@@ -13,7 +13,6 @@ namespace MineSweeper
             NotSweeped = 'X',
             SweepedZeroCloseMine = '.'
         }
-
         enum GameOverSymbol
         {
             ExplodedMine = 'M',
@@ -22,12 +21,11 @@ namespace MineSweeper
             MisplacedFlag = 'Ⅎ'
         }
 
-
         private int closeMineCount; // Antal minor på intilliggande rutor
         private bool flagged, boobyTrapped, sweeped;
         private char symbol;
 
-        // Konstruktor som initierar en ny ruta på spelplanen.
+        //Konstruktor som initierar en ny ruta på spelplanen.
         public Square(bool isBoobyTrapped)
         {
             closeMineCount = 0;
@@ -56,7 +54,6 @@ namespace MineSweeper
         {
             set
             {
-
 
             } // Stubbe
         }

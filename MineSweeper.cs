@@ -9,20 +9,30 @@ namespace MineSweeper
     {
         private Board board;
         private bool quit;
+        private string[] input;
 
         // Konstruktor som initierare ett nytt spel med en slumpmässig spelplan.
         public MineSweeper(string[] args)
         {
             board = new Board(args);
             quit = false;
-
+            input = new string[2];
         }
 
         // Läs ett nytt kommando från användaren med giltig syntax och 
         // ett känt kommandotecken.
         static private string ReadCommand() // Stubbe
         {
-            return null;
+            string[] input = new string[2];
+
+            for (int i = 0; i <= 1; i++)
+            {
+                input[i] = Console.ReadLine();
+            }
+            Helper.Initialize(input);
+
+            return input.ToString();
+
         }
 
         // Kör spelet efter initering. Metoden returnerar när spelet tar 
@@ -37,6 +47,7 @@ namespace MineSweeper
                 // Skriv klart spelloopen här
                 Console.WriteLine("Skriv färdigt spelet!");
                 board.Print();
+                ReadCommand();
                 break;
             }
         }

@@ -16,6 +16,8 @@ namespace MineSweeper
             board = new Square[10, 10];
             flagCount = 0;
             sweepedCount = 0;
+
+
         }
 
         // Enbart läsbar egenskap som säger som spelaren har vunnit spelet.

@@ -13,12 +13,7 @@ namespace MineSweeper
         {
             MineSweeper game = new MineSweeper(args);
 
-            // Denna funktion startar spelet.
             game.Run();
-
-
-
-
 
 
         }

@@ -9,30 +9,24 @@ namespace MineSweeper
     {
         private Board board;
         private bool quit;
-        private string[] input;
+        private Square square;
 
         // Konstruktor som initierare ett nytt spel med en slumpmässig spelplan.
         public MineSweeper(string[] args)
         {
             board = new Board(args);
             quit = false;
-            input = new string[2];
+            square = new Square(isBoobyTrapped: true);
         }
 
         // Läs ett nytt kommando från användaren med giltig syntax och 
         // ett känt kommandotecken.
-        static private string ReadCommand() // Stubbe
+        static private string ReadCommand(string prompt) // Stubbe
         {
-            string[] input = new string[2];
 
-            for (int i = 0; i <= 1; i++)
-            {
-                input[i] = Console.ReadLine();
-            }
-            Helper.Initialize(input);
-
-            return input.ToString();
-
+            Console.Write(prompt);
+            string input = Console.ReadLine();
+            return input;
         }
 
         // Kör spelet efter initering. Metoden returnerar när spelet tar 
@@ -42,14 +36,38 @@ namespace MineSweeper
         // - Spelaren vann spelet genom att alla ej minerade rutor är röjda.
         public void Run() // Stubbe
         {
+            Console.Clear();
+            Console.WriteLine();
+            board.Print();
+
             while (!(quit || board.PlayerWon || board.GameOver))
             {
                 // Skriv klart spelloopen här
-                Console.WriteLine("Skriv färdigt spelet!");
+
+                Console.WriteLine();
+                Console.WriteLine("skriv row: ");
+                string row = Console.ReadLine();
+                int rows = int.Parse(row);
+
+                Console.WriteLine("skriv col: ");
+                string column = Console.ReadLine();
+                int col = int.Parse(column);
+
+
+                if (!(square.IsRevealed && square.IsFlagged && square.BoobyTrapped))
+                {
+
+                    board.TryReveal(rows, col);
+                    if (board.GameOver == true)
+                    {
+                        board.IsMine(rows, col);
+                    }
+                    //Här ska inputs av användaren ta platsen i argumentet.
+                }
+
                 board.Print();
-                ReadCommand();
-                break;
             }
         }
     }
 }
+

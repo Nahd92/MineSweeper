@@ -4,7 +4,6 @@ using System.Text;
 
 namespace MineSweeper
 {
-    // Typ för minröjspelet. 
     struct MineSweeper
     {
         private Board board;
@@ -12,20 +11,23 @@ namespace MineSweeper
         private Square square;
 
         // Konstruktor som initierare ett nytt spel med en slumpmässig spelplan.
+
         public MineSweeper(string[] args)
         {
             board = new Board(args);
             quit = false;
             square = new Square(isBoobyTrapped: true);
+
         }
 
         // Läs ett nytt kommando från användaren med giltig syntax och 
         // ett känt kommandotecken.
         static private string ReadCommand(string prompt) // Stubbe
         {
-
             Console.Write(prompt);
             string input = Console.ReadLine();
+
+
             return input;
         }
 
@@ -49,7 +51,7 @@ namespace MineSweeper
                 string row = Console.ReadLine();
                 int rows = int.Parse(row);
 
-                Console.WriteLine("skriv col: ");
+                Console.WriteLine("skriv row: ");
                 string column = Console.ReadLine();
                 int col = int.Parse(column);
 
@@ -58,10 +60,17 @@ namespace MineSweeper
                 {
 
                     board.TryReveal(rows, col);
-                    if (board.GameOver == true)
-                    {
-                        board.IsMine(rows, col);
-                    }
+                    board.RevealBoard(rows, col);
+
+
+
+
+
+
+
+
+
+
                     //Här ska inputs av användaren ta platsen i argumentet.
                 }
 

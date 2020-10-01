@@ -34,66 +34,57 @@ namespace MineSweeper
             flagged = false;
             this.boobyTrapped = isBoobyTrapped;
             sweeped = false;
-            symbol = 'X';
-            IsFlagged = false;
-            IsRevealed = false;
+            symbol = (char)GameSymbol.NotSweeped;
         }
+
 
         // Enbart läsbar egenskap som säger om rutan är flaggad för tillfället.
-        public bool IsFlagged { get; set; }
+        public int CloseMineCount
+        {
+            get { return closeMineCount; }
+            set { closeMineCount = value; }
+        }
+        // Enbart läsbar egenskap som säger om rutan är flaggad för tillfället.
+        public bool IsFlagged => flagged;
 
         // Enbart läsbar egenskap som säger om rutan är minerad.
-        public bool BoobyTrapped
-        {
-            get
-            {
-                return boobyTrapped;
-            }
-            set { }
+        public bool BoobyTrapped => boobyTrapped;
 
-        }
 
         // Enbart läsbar egenskap som säger om rutan har blivit röjd. 
-        public bool IsRevealed { get; set; }
+        public bool IsRevealed => sweeped;
 
 
 
         // Enbart läsbar egenskap som är symbolen som representerar rutan just nu 
         // om spelplanen skall ritas ut.
-        public char Symbol
-        {
-            get
-            {
-                if (IsRevealed && boobyTrapped)
-                {
-                    return (char)GameOverSymbol.Mine;
-                }
-
-                else if (IsRevealed && !(IsFlagged && boobyTrapped))
-                {
-                    return (char)GameSymbol.SweepedZeroCloseMine;
-                }
-                else if (IsFlagged && !(boobyTrapped && IsRevealed))
-                {
-                    return (char)GameSymbol.Flagged;
-                }
-                else
-                {
-                    return (char)GameSymbol.NotSweeped;
-                }
-            }
-
-        }
-
+        public char Symbol => symbol;
         // Enbart skrivbar egenskap som tilldelas true för alla rutor om spelaren 
         // röjer en minerad ruta 
         public bool GameOver
         {
             set
             {
-
+                if (value)
+                {
+                    if (flagged && boobyTrapped)
+                    {
+                        symbol = (char)GameOverSymbol.FlaggedMine;
+                    }
+                    if (sweeped && boobyTrapped)
+                    {
+                        symbol = (char)GameOverSymbol.ExplodedMine;
+                    }
+                    if (boobyTrapped && !sweeped)
+                    {
+                        symbol = (char)GameOverSymbol.Mine;
+                    }
+                    if (flagged && !boobyTrapped)
+                    {
+                        symbol = (char)GameOverSymbol.MisplacedFlag;
+                    }
+                }
             }
-            // Stubbe
         }
 
         // Öka räknaren av minor på intilliggande rutor med 1.
@@ -105,17 +96,51 @@ namespace MineSweeper
         // Försök att flagga rutan. Returnerar false om ogiltigt drag, annars true.
         public bool TryFlag()
         {
-            if (!IsRevealed && !boobyTrapped)
+            if (IsRevealed)
             {
-                flagged = true;
+                Console.WriteLine("ILLEGAL COMMAND");
+                return false;
             }
-            return flagged;
+            else
+            {
+                if (flagged)
+                {
+                    flagged = false;
+                    symbol = (char)GameSymbol.NotSweeped;
+
+                }
+                else
+                {
+                    flagged = true;
+                    symbol = (char)GameSymbol.Flagged;
+                }
+                flagged = !flagged;
+                return true;
+
+            }
         }
 
         // Försök röja rutan. Returnerar false om ogiltigt drag, annars true.
         public bool TryReveal() // Stubbe
         {
-            return false;
+            if (!sweeped && !flagged)
+            {
+                sweeped = true;
+                if (closeMineCount == 0)
+                {
+                    symbol = (char)GameSymbol.SweepedZeroCloseMine;
+                }
+                else
+                {
+                    symbol = char.Parse(closeMineCount.ToString());
+                }
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("ILLEGAL COMMAND");
+                return false;
+            }
         }
 
     }

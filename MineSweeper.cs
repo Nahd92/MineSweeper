@@ -60,7 +60,6 @@ namespace MineSweeper
                 {
 
                     board.TryReveal(rows, col);
-                    board.RevealBoard(rows, col);
 
 
 

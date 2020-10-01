@@ -85,7 +85,6 @@ namespace MineSweeper
 
         public bool TryReveal(int row, int col)
         {
-
             return board[row, col].TryReveal();
         }
 
@@ -98,14 +97,14 @@ namespace MineSweeper
                 if (board[row, col].IsRevealed || GameOver) return;
                 if (board[row, col].BoobyTrapped)
                 {
-                    board[row, col].TryReveal();
-                    GameOver = true;
+                    board[row, col].IsMine();
+                    GameOver = false;
                     return;
                 }
                 else
                 {
                     board[row, col].TryReveal();
-                    if ((row + 1 < 10) && !board[row + 1, col].TryReveal()) RevealBoard(row + 1, col);
+                    if ((row + 1 < 10) && !board[row + 1, col].IsRevealed) RevealBoard(row + 1, col);
                     if ((row + 1 < 10 && col + 1 < 10) && !board[row + 1, col + 1].IsRevealed) RevealBoard(row + 1, col + 1);
                     if ((row + 1 < 10 && col - 1 >= 0) && !board[row + 1, col - 1].IsRevealed) RevealBoard(row + 1, col - 1);
                     if ((col + 1 < 10) && !board[row, col + 1].IsRevealed) RevealBoard(row, col + 1);

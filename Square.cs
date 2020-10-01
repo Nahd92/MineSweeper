@@ -87,6 +87,18 @@ namespace MineSweeper
             }
         }
 
+
+        public bool IsMine()
+        {
+            if (boobyTrapped)
+            {
+                symbol = (char)GameOverSymbol.Mine;
+                return true;
+            }
+            return false;
+
+        }
+
         // Öka räknaren av minor på intilliggande rutor med 1.
         public void IncrementCloseMineCount() // Stubbe
         {

@@ -59,7 +59,7 @@ namespace MineSweeper
                 if (!(square.IsRevealed && square.IsFlagged && square.BoobyTrapped))
                 {
 
-                    board.TryReveal(rows, col);
+                    board.RevealBoard(rows, col);
 
 
 

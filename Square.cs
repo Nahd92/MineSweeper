@@ -64,16 +64,16 @@ namespace MineSweeper
         {
             get
             {
-                if (IsRevealed == true && boobyTrapped == true)
+                if (IsRevealed && boobyTrapped)
                 {
                     return (char)GameOverSymbol.Mine;
                 }
 
-                else if (IsRevealed == true && IsFlagged == false && boobyTrapped == false)
+                else if (IsRevealed && !(IsFlagged && boobyTrapped))
                 {
                     return (char)GameSymbol.SweepedZeroCloseMine;
                 }
-                else if (IsFlagged == true && boobyTrapped == false && IsRevealed == false)
+                else if (IsFlagged && !(boobyTrapped && IsRevealed))
                 {
                     return (char)GameSymbol.Flagged;
                 }

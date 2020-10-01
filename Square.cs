@@ -82,7 +82,7 @@ namespace MineSweeper
                     return (char)GameSymbol.NotSweeped;
                 }
             }
-            set { }
+
         }
 
         // Enbart skrivbar egenskap som tilldelas true för alla rutor om spelaren 

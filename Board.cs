@@ -51,18 +51,23 @@ namespace MineSweeper
 
 
         // Enbart läsbar egenskap som säger som spelaren har vunnit spelet.
-        public bool PlayerWon => false;
+        public bool PlayerWon
+        {
+            get
+            {
+                Console.WriteLine("WELL DONE!");
+                return true;
+            }
+        }
 
 
         // Enbart läsbar egenskap som säger om spelaren har förlorat.
         public bool GameOver
         {
-            set
+            get
             {
-                if (true)
-                {
-                    Console.WriteLine("GAME OVER");
-                }
+                Console.WriteLine("GAME OVER");
+                return true;
             }
         }
 

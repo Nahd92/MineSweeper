@@ -46,34 +46,34 @@ namespace MineSweeper
             {
                 // Skriv klart spelloopen här
 
+                // Skriv klart spelloopen här
+
                 Console.WriteLine();
-                Console.WriteLine("skriv row: ");
+
+                Console.Write("f/r? : ");
+                string input = Console.ReadLine();
+                char inted = char.Parse(input);
+
+
+                Console.Write("row: ");
                 string row = Console.ReadLine();
                 int rows = int.Parse(row);
 
-                Console.WriteLine("skriv row: ");
+                Console.Write("col: ");
                 string column = Console.ReadLine();
                 int col = int.Parse(column);
 
 
-                if (!(square.IsRevealed && square.IsFlagged && square.BoobyTrapped))
+                if (inted == 'f')
                 {
-
-                    board.TryReveal(rows, col, 0);
-
-
-
-
-
-
-
-
-
-
-                    //Här ska inputs av användaren ta platsen i argumentet.
+                    board.TryFlag(rows, col);
+                    board.Print();
                 }
-
-                board.Print();
+                else if (inted == 'r')
+                {
+                    board.TryReveal(rows, col, 0);
+                    board.Print();
+                }
             }
         }
     }

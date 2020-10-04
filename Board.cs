@@ -55,7 +55,16 @@ namespace MineSweeper
 
 
         // Enbart läsbar egenskap som säger om spelaren har förlorat.
-        public bool GameOver { get; set; }
+        public bool GameOver
+        {
+            set
+            {
+                if (true)
+                {
+                    Console.WriteLine("GAME OVER");
+                }
+            }
+        }
 
 
 
@@ -109,8 +118,13 @@ namespace MineSweeper
 
 
         // Försök flagga en ruta. Returnerar false om ogiltigt drag, annars true.
-        public bool TryFlag(int row, int col) // Stubbe
+        public bool TryFlag(int row, int col)
         {
+            if (!board[row, col].IsFlagged && !board[row, col].IsRevealed)
+            {
+                flagCount++;
+                return board[row, col].TryFlag();
+            }
             return false;
         }
 

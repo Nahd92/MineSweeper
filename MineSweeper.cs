@@ -66,7 +66,7 @@ namespace MineSweeper
             while (!(quit || board.PlayerWon || board.GameOver))
             {
 
-                ReadCommand(" >");
+                ReadCommand("> ");
 
 
 

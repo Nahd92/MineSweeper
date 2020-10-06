@@ -6,7 +6,7 @@ namespace MineSweeper
 {
     struct MineSweeper
     {
-        private Board board;
+        private static Board board;
         private bool quit;
         private Square square;
 
@@ -24,11 +24,32 @@ namespace MineSweeper
         // ett känt kommandotecken.
         static private string ReadCommand(string prompt) // Stubbe
         {
-            Console.Write(prompt);
-            string input = Console.ReadLine();
+            Console.WriteLine();
 
+            while (true)
+            {
+                Console.Write(prompt);
+                var input = Console.ReadLine().Split(' ');
+                var command = input[0].Trim();
+                var row = int.Parse(input[1].Trim());
+                var col = char.Parse(input[2].Trim());
+                int cols = ((int)char.ToUpper(col)) - 65;
 
-            return input;
+                if (command == "r")
+                {
+                    board.TryReveal(row, cols);
+                    board.Print();
+                }
+                else if (command == "f")
+                {
+                    board.TryFlag(row, cols);
+                    board.Print();
+                }
+                else
+                {
+                    Console.WriteLine("Wrong syntax");
+                }
+            }
         }
 
         // Kör spelet efter initering. Metoden returnerar när spelet tar 
@@ -44,36 +65,13 @@ namespace MineSweeper
 
             while (!(quit || board.PlayerWon || board.GameOver))
             {
-                // Skriv klart spelloopen här
 
-                // Skriv klart spelloopen här
-
-                Console.WriteLine();
-
-                Console.Write("f/r? : ");
-                string input = Console.ReadLine();
-                char inted = char.Parse(input);
+                ReadCommand(" >");
 
 
-                Console.Write("row: ");
-                string row = Console.ReadLine();
-                int rows = int.Parse(row);
-
-                Console.Write("col: ");
-                string column = Console.ReadLine();
-                int col = int.Parse(column);
 
 
-                if (inted == 'f')
-                {
-                    board.TryFlag(rows, col);
-                    board.Print();
-                }
-                else if (inted == 'r')
-                {
-                    board.TryReveal(rows, col);
-                    board.Print();
-                }
+
             }
         }
     }

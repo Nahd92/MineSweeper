@@ -85,10 +85,10 @@ namespace MineSweeper
         // Försök flagga en ruta. Returnerar false om ogiltigt drag, annars true.
         public bool TryFlag(int row, int col)
         {
-            if (!board[row, col].IsFlagged)
+            if (!board[row, col].IsFlagged && !(flagCount >= 20))
             {
                 flagCount++;
-                return board[row, col].TryFlag();
+                board[row, col].TryFlag();
             }
             return false;
         }

@@ -55,7 +55,6 @@ namespace MineSweeper
         public bool IsRevealed => sweeped;
 
 
-
         // Enbart läsbar egenskap som är symbolen som representerar rutan just nu 
         // om spelplanen skall ritas ut.
         public char Symbol => symbol;
@@ -85,8 +84,15 @@ namespace MineSweeper
                     }
                 }
             }
+
         }
 
+
+        // Öka räknaren av minor på intilliggande rutor med 1.
+        public void IncrementCloseMineCount() // Stubbe
+        {
+            closeMineCount++;
+        }
 
         public bool IsMine()
         {
@@ -99,18 +105,12 @@ namespace MineSweeper
 
         }
 
-        // Öka räknaren av minor på intilliggande rutor med 1.
-        public void IncrementCloseMineCount() // Stubbe
-        {
-            closeMineCount++;
-        }
-
         // Försök att flagga rutan. Returnerar false om ogiltigt drag, annars true.
         public bool TryFlag()
         {
             if (IsRevealed)
             {
-                Console.WriteLine("ILLEGAL COMMAND");
+                Console.WriteLine("not allowed");
                 return false;
             }
             else
@@ -133,7 +133,7 @@ namespace MineSweeper
         }
 
         // Försök röja rutan. Returnerar false om ogiltigt drag, annars true.
-        public bool TryReveal() // Stubbe
+        public bool TryReveal()
         {
             if (!sweeped && !flagged)
             {
@@ -150,10 +150,11 @@ namespace MineSweeper
             }
             else
             {
-                Console.WriteLine("ILLEGAL COMMAND");
+                Console.WriteLine("not allowed");
                 return false;
             }
         }
 
     }
 }
+

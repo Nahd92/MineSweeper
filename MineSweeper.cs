@@ -71,7 +71,7 @@ namespace MineSweeper
                 }
                 else if (inted == 'r')
                 {
-                    board.TryReveal(rows, col, 0);
+                    board.TryReveal(rows, col);
                     board.Print();
                 }
             }

@@ -95,17 +95,20 @@ namespace MineSweeper
 
         public bool TryReveal(int row, int col)
         {
+
             if (IsValid(row, col) || !board[row, col].IsRevealed)
             {
                 if (board[row, col].TryReveal() && board[row, col].Symbol == (char)Square.GameSymbol.SweepedZeroCloseMine)
+                {
                     if ((row + 1 < 10) && !board[row + 1, col].IsRevealed) TryReveal(row + 1, col);
-                if ((row + 1 < 10 && col + 1 < 10) && !board[row + 1, col + 1].IsRevealed) TryReveal(row + 1, col + 1);
-                if ((row + 1 < 10 && col - 1 >= 0) && !board[row + 1, col - 1].IsRevealed) TryReveal(row + 1, col - 1);
-                if ((col + 1 < 10) && !board[row, col + 1].IsRevealed) TryReveal(row, col + 1);
-                if ((col - 1 >= 0) && !board[row, col - 1].IsRevealed) TryReveal(row, col - 1);
-                if ((row - 1 >= 0 && col + 1 < 10) && !board[row - 1, col + 1].IsRevealed) TryReveal(row - 1, col + 1);
-                if ((row - 1 >= 0 && col - 1 >= 0) && !board[row - 1, col - 1].IsRevealed) TryReveal(row - 1, col - 1);
-                if ((row - 1 >= 0) && !board[row - 1, col].IsRevealed) TryReveal(row - 1, col);
+                    if ((row + 1 < 10 && col + 1 < 10) && !board[row + 1, col + 1].IsRevealed) TryReveal(row + 1, col + 1);
+                    if ((row + 1 < 10 && col - 1 >= 0) && !board[row + 1, col - 1].IsRevealed) TryReveal(row + 1, col - 1);
+                    if ((col + 1 < 10) && !board[row, col + 1].IsRevealed) TryReveal(row, col + 1);
+                    if ((col - 1 >= 0) && !board[row, col - 1].IsRevealed) TryReveal(row, col - 1);
+                    if ((row - 1 >= 0 && col + 1 < 10) && !board[row - 1, col + 1].IsRevealed) TryReveal(row - 1, col + 1);
+                    if ((row - 1 >= 0 && col - 1 >= 0) && !board[row - 1, col - 1].IsRevealed) TryReveal(row - 1, col - 1);
+                    if ((row - 1 >= 0) && !board[row - 1, col].IsRevealed) TryReveal(row - 1, col);
+                }
             }
             return false;
         }

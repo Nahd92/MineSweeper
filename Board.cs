@@ -95,40 +95,41 @@ namespace MineSweeper
 
         public bool TryReveal(int row, int col)
         {
-
-            if (IsValid(row, col) || !board[row, col].IsRevealed)
+            if (!board[row, col].IsRevealed)
             {
                 if (board[row, col].TryReveal() && board[row, col].Symbol == (char)Square.GameSymbol.SweepedZeroCloseMine)
                 {
-                    if ((row + 1 < 10) && !board[row + 1, col].IsRevealed) TryReveal(row + 1, col);
-                    if ((row + 1 < 10 && col + 1 < 10) && !board[row + 1, col + 1].IsRevealed) TryReveal(row + 1, col + 1);
-                    if ((row + 1 < 10 && col - 1 >= 0) && !board[row + 1, col - 1].IsRevealed) TryReveal(row + 1, col - 1);
-                    if ((col + 1 < 10) && !board[row, col + 1].IsRevealed) TryReveal(row, col + 1);
-                    if ((col - 1 >= 0) && !board[row, col - 1].IsRevealed) TryReveal(row, col - 1);
-                    if ((row - 1 >= 0 && col + 1 < 10) && !board[row - 1, col + 1].IsRevealed) TryReveal(row - 1, col + 1);
-                    if ((row - 1 >= 0 && col - 1 >= 0) && !board[row - 1, col - 1].IsRevealed) TryReveal(row - 1, col - 1);
-                    if ((row - 1 >= 0) && !board[row - 1, col].IsRevealed) TryReveal(row - 1, col);
+                    for (int i = -1; i < 2; i++)
+                    {
+                        for (int j = -1; j < 2; j++)
+                        {
+                            if (IsValid(row + i, col + j) && (!board[row + i, col + j].IsRevealed))
+                                TryReveal(row + i, col + j);
+                        }
+                    }
+                    sweepedCount++;
                 }
             }
             return false;
         }
+    }
 
 
-        // Skriv ut spelplanen till konsolen.
-        public void Print() // Stubbe
+    // Skriv ut spelplanen till konsolen.
+    public void Print() // Stubbe
+    {
+        //Fill the data 
+        Console.WriteLine("     A B C D E F G H I J ");
+        Console.WriteLine("   +--------------------");
+        for (int row = 0; row < 10; row++)
         {
-            //Fill the data 
-            Console.WriteLine("     A B C D E F G H I J ");
-            Console.WriteLine("   +--------------------");
-            for (int row = 0; row < 10; row++)
+            Console.Write($" {row} |");
+            for (int col = 0; col < 10; col++)
             {
-                Console.Write($" {row} |");
-                for (int col = 0; col < 10; col++)
-                {
-                    Console.Write(" " + board[row, col].Symbol);
-                }
-                Console.WriteLine();
+                Console.Write(" " + board[row, col].Symbol);
             }
+            Console.WriteLine();
         }
     }
+}
 }

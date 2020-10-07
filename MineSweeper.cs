@@ -24,29 +24,32 @@ namespace MineSweeper
         // ett känt kommandotecken.
         static private string ReadCommand(string prompt) // Stubbe
         {
-            do
+            while (true)
             {
                 Console.Write(prompt);
-                var input = Console.ReadLine().Split(' ');
-                var command = input[0].Trim();
-                var row = int.Parse(input[1].Trim());
-                var col = char.Parse(input[2].Trim());
-                int cols = ((int)char.ToUpper(col)) - 65;
+                var input = Console.ReadLine();
 
-                if (command == "r".ToLower())
+                string command = input[0].ToString();
+                string emptySpace = input[1].ToString();
+                var col = char.Parse(input[2].ToString());
+                int cols = ((int)char.ToUpper(col)) - 65;
+                var row = int.Parse(input[3].ToString());
+
+
+                if (input.Length == 4 && command == "f")
                 {
-                    return "r";
+                    return board.TryFlag(row, cols).ToString();
                 }
-                else if (command == "f".ToLower())
+                else if (command == "r")
                 {
-                    return "f";
+                    return board.TryReveal(row, cols).ToString();
                 }
                 else
                 {
-                    Console.WriteLine("syntax error");
+                    Console.WriteLine("Syntax Error");
                 }
+
             }
-            while (true);
         }
 
         // Kör spelet efter initering. Metoden returnerar när spelet tar 

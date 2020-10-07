@@ -112,24 +112,24 @@ namespace MineSweeper
             }
             return false;
         }
-    }
 
 
-    // Skriv ut spelplanen till konsolen.
-    public void Print() // Stubbe
-    {
-        //Fill the data 
-        Console.WriteLine("     A B C D E F G H I J ");
-        Console.WriteLine("   +--------------------");
-        for (int row = 0; row < 10; row++)
+
+        // Skriv ut spelplanen till konsolen.
+        public void Print() // Stubbe
         {
-            Console.Write($" {row} |");
-            for (int col = 0; col < 10; col++)
+            //Fill the data 
+            Console.WriteLine("     A B C D E F G H I J ");
+            Console.WriteLine("   +--------------------");
+            for (int row = 0; row < 10; row++)
             {
-                Console.Write(" " + board[row, col].Symbol);
+                Console.Write($" {row} |");
+                for (int col = 0; col < 10; col++)
+                {
+                    Console.Write(" " + board[row, col].Symbol);
+                }
+                Console.WriteLine();
             }
-            Console.WriteLine();
         }
     }
-}
 }

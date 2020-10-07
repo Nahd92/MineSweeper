@@ -41,6 +41,7 @@ namespace MineSweeper
                     for (int i = 0; i < nearbyMine; i++)
                     {
                         board[row, col].IncrementCloseMineCount();
+                        board[row, col].IsMine();
                     }
                 }
             }
@@ -66,20 +67,19 @@ namespace MineSweeper
         private int CalculateNearbyMines(int row, int col)
         {
             int numberOfMines = 0;
-            if (board[row, col].BoobyTrapped) return Square.mineValue;
 
-            if (row - 1 >= 0 && board[row - 1, col].BoobyTrapped) numberOfMines++;
-            if (row - 1 >= 0 && col - 1 >= 0 && board[row - 1, col - 1].BoobyTrapped) numberOfMines++;
-            if (row - 1 >= 0 && col + 1 < 10 && board[row - 1, col + 1].BoobyTrapped) numberOfMines++;
-            if (col - 1 >= 0 && board[row, col - 1].BoobyTrapped) numberOfMines++;
-            if (col + 1 < 10 && board[row, col + 1].BoobyTrapped) numberOfMines++;
-            if (row + 1 < 10 && col - 1 >= 0 && board[row + 1, col - 1].BoobyTrapped) numberOfMines++;
-            if (row + 1 < 10 && board[row + 1, col].BoobyTrapped) numberOfMines++;
-            if (row + 1 < 10 && col + 1 < 10 && board[row + 1, col + 1].BoobyTrapped) numberOfMines++;
+            for (int i = -1; i < 2; i++)
+            {
+                for (int j = -1; j < 2; j++)
+                {
+                    if (IsValid(row + i, col + j) && (board[row + i, col + j].BoobyTrapped))
+                    {
+                        numberOfMines++;
+                    }
+                }
+            }
             return numberOfMines;
         }
-
-
 
 
         // Försök flagga en ruta. Returnerar false om ogiltigt drag, annars true.

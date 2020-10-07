@@ -40,10 +40,9 @@ namespace MineSweeper
 
                     if (!(input.StartsWith("f") || input.StartsWith("r") || input.StartsWith("q")))
                     {
-                        Console.WriteLine("wrong syntax");
+                        Console.WriteLine("wrong Command");
                         continue;
                     }
-
                     return input;
                 }
             }

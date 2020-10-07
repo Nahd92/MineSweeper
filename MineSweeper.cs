@@ -24,9 +24,7 @@ namespace MineSweeper
         // ett känt kommandotecken.
         static private string ReadCommand(string prompt) // Stubbe
         {
-            Console.WriteLine();
-
-            while (true)
+            do
             {
                 Console.Write(prompt);
                 var input = Console.ReadLine().Split(' ');
@@ -35,21 +33,20 @@ namespace MineSweeper
                 var col = char.Parse(input[2].Trim());
                 int cols = ((int)char.ToUpper(col)) - 65;
 
-                if (command == "r")
+                if (command == "r".ToLower())
                 {
-                    board.TryReveal(row, cols);
-                    board.Print();
+                    return "r";
                 }
-                else if (command == "f")
+                else if (command == "f".ToLower())
                 {
-                    board.TryFlag(row, cols);
-                    board.Print();
+                    return "f";
                 }
                 else
                 {
-                    Console.WriteLine("Wrong syntax");
+                    Console.WriteLine("syntax error");
                 }
             }
+            while (true);
         }
 
         // Kör spelet efter initering. Metoden returnerar när spelet tar 
@@ -66,10 +63,7 @@ namespace MineSweeper
             while (!(quit || board.PlayerWon || board.GameOver))
             {
 
-                ReadCommand("> ");
-
-
-
+                var input = ReadCommand("> ");
 
 
             }

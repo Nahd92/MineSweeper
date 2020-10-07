@@ -93,51 +93,22 @@ namespace MineSweeper
             return false;
         }
 
-
         public bool TryReveal(int row, int col)
         {
             if (IsValid(row, col) || !board[row, col].IsRevealed)
             {
                 if (board[row, col].TryReveal() && board[row, col].Symbol == (char)Square.GameSymbol.SweepedZeroCloseMine)
-                {
                     if ((row + 1 < 10) && !board[row + 1, col].IsRevealed) TryReveal(row + 1, col);
-                    if ((row + 1 < 10 && col + 1 < 10) && !board[row + 1, col + 1].IsRevealed) TryReveal(row + 1, col + 1);
-                    if ((row + 1 < 10 && col - 1 >= 0) && !board[row + 1, col - 1].IsRevealed) TryReveal(row + 1, col - 1);
-                    if ((col + 1 < 10) && !board[row, col + 1].IsRevealed) TryReveal(row, col + 1);
-                    if ((col - 1 >= 0) && !board[row, col - 1].IsRevealed) TryReveal(row, col - 1);
-                    if ((row - 1 >= 0 && col + 1 < 10) && !board[row - 1, col + 1].IsRevealed) TryReveal(row - 1, col + 1);
-                    if ((row - 1 >= 0 && col - 1 >= 0) && !board[row - 1, col - 1].IsRevealed) TryReveal(row - 1, col - 1);
-                    if ((row - 1 >= 0) && !board[row - 1, col].IsRevealed) TryReveal(row - 1, col);
-                }
-
+                if ((row + 1 < 10 && col + 1 < 10) && !board[row + 1, col + 1].IsRevealed) TryReveal(row + 1, col + 1);
+                if ((row + 1 < 10 && col - 1 >= 0) && !board[row + 1, col - 1].IsRevealed) TryReveal(row + 1, col - 1);
+                if ((col + 1 < 10) && !board[row, col + 1].IsRevealed) TryReveal(row, col + 1);
+                if ((col - 1 >= 0) && !board[row, col - 1].IsRevealed) TryReveal(row, col - 1);
+                if ((row - 1 >= 0 && col + 1 < 10) && !board[row - 1, col + 1].IsRevealed) TryReveal(row - 1, col + 1);
+                if ((row - 1 >= 0 && col - 1 >= 0) && !board[row - 1, col - 1].IsRevealed) TryReveal(row - 1, col - 1);
+                if ((row - 1 >= 0) && !board[row - 1, col].IsRevealed) TryReveal(row - 1, col);
             }
             return false;
         }
-
-
-
-        //Används inte för tillfället
-        public void revealsquare(int row, int col)
-        {
-            if (IsValid(row, col) && !board[row, col].IsRevealed)
-            {
-                board[row, col].TryReveal();
-                if ((row + 1 < 10) && !board[row + 1, col].IsRevealed && board[row + 1, col].BoobyTrapped) revealsquare(row + 1, col);
-                if ((row + 1 < 10 && col + 1 < 10) && !board[row + 1, col + 1].IsRevealed && board[row + 1, col + 1].BoobyTrapped) revealsquare(row + 1, col + 1);
-                if ((row + 1 < 10 && col - 1 >= 0) && !board[row + 1, col - 1].IsRevealed && board[row + 1, col - 1].BoobyTrapped) revealsquare(row + 1, col - 1);
-                if ((col + 1 < 10) && !board[row, col + 1].IsRevealed && board[row, col + 1].BoobyTrapped) revealsquare(row, col + 1);
-                if ((col - 1 >= 0) && !board[row, col - 1].IsRevealed && board[row, col - 1].BoobyTrapped) revealsquare(row, col - 1);
-                if ((row - 1 >= 0 && col + 1 < 10) && !board[row - 1, col + 1].IsRevealed && board[row - 1, col + 1].BoobyTrapped) revealsquare(row - 1, col + 1);
-                if ((row - 1 >= 0 && col - 1 >= 0) && !board[row - 1, col - 1].IsRevealed && board[row - 1, col - 1].BoobyTrapped) revealsquare(row - 1, col - 1);
-                if ((row - 1 >= 0) && !board[row - 1, col].IsRevealed && !board[row - 1, col].BoobyTrapped) revealsquare(row - 1, col);
-            }
-        }
-
-
-
-
-
-
 
 
         // Skriv ut spelplanen till konsolen.

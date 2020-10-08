@@ -22,28 +22,66 @@ namespace MineSweeper
 
         // Läs ett nytt kommando från användaren med giltig syntax och 
         // ett känt kommandotecken.
-        static private string ReadCommand(string prompt) // Stubbe
+        static private string ReadCommand(string prompt)
         {
             while (true)
             {
-                while (true)
+                Console.Write(prompt);
+                string input = Console.ReadLine();
+
+                if (!(input.Length == 1 || input.Length == 4))
                 {
-                    Console.Write(prompt);
-                    string input = Console.ReadLine();
+                    Console.WriteLine("syntax error");
+                    continue;
+                }
 
-                    //Syntax
-                    if (string.IsNullOrEmpty(input) || !(input.Length == 1 || input.Length == 4))
+                if (!Regex.IsMatch(input[0].ToString(), @"[a-ö]"))
+                {
+                    Console.WriteLine("syntax error");
+                    continue;
+                }
+
+                if (input.Length == 1)
+                {
+                    if (!(input == "q"))
                     {
-                        Console.WriteLine("syntax error");
+                        Console.WriteLine("unknown command");
                         continue;
                     }
-
-                    if (!(input.StartsWith("f") || input.StartsWith("r") || input.StartsWith("q")))
+                    else
                     {
-                        Console.WriteLine("wrong Command");
+                        return input;
+                    }
+                }
+
+                if (!(input[1].ToString() == " "))
+                {
+                    Console.WriteLine("syntax error");
+                    continue;
+                }
+                if (!Char.IsLetter(input[2]) || !Regex.IsMatch(input[2].ToString(), @"[a-j]"))
+                {
+                    Console.WriteLine("syntax error");
+                    continue;
+                }
+                if (!Char.IsNumber(input[3]) || !Regex.IsMatch(input[3].ToString(), @"[0-9]"))
+                {
+                    Console.WriteLine("syntax error");
+                    continue;
+                }
+
+                if (input.Length == 4)
+                {
+
+                    if (!(input.StartsWith('f') || input.StartsWith('r')))
+                    {
+                        Console.WriteLine("unkown command");
                         continue;
                     }
-                    return input;
+                    else
+                    {
+                        return input;
+                    }
                 }
             }
         }

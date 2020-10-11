@@ -122,7 +122,7 @@ namespace MineSweeper
                     board.Print();
                     if (board.GameOver)
                     {
-                        System.Console.WriteLine("GAME OVER!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                        System.Console.WriteLine("GAME OVER!");
                     }
                     if (board.PlayerWon)
                     {

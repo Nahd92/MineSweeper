@@ -126,7 +126,7 @@ namespace MineSweeper
                     flagged = true;
                     symbol = (char)GameSymbol.Flagged;
                 }
-                flagged = !flagged;
+                
                 return true;
 
             }

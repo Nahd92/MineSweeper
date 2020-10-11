@@ -13,14 +13,16 @@ namespace MineSweeper
     {
         Square[,] board;
         private int flagCount, sweepedCount;
-
+        private bool gameOver;
+        private bool playerWon;
         // Konstruktor som initaliserar en ny spelplan.
         public Board(string[] args)
         {
             board = new Square[10, 10];
             flagCount = 0;
             sweepedCount = 0;
-
+            gameOver = false;
+            playerWon  = false; 
 
 
             Helper.Initialize(args);
@@ -41,7 +43,6 @@ namespace MineSweeper
                     for (int i = 0; i < nearbyMine; i++)
                     {
                         board[row, col].IncrementCloseMineCount();
-                        board[row, col].IsMine();
                     }
                 }
             }
@@ -49,11 +50,11 @@ namespace MineSweeper
 
 
         // Enbart läsbar egenskap som säger som spelaren har vunnit spelet.
-        public bool PlayerWon => false;
+        public bool PlayerWon => playerWon;
 
 
         // Enbart läsbar egenskap som säger om spelaren har förlorat.
-        public bool GameOver => false;
+        public bool GameOver => gameOver;
 
 
 
@@ -67,25 +68,26 @@ namespace MineSweeper
         private int CalculateNearbyMines(int row, int col)
         {
             int numberOfMines = 0;
+            if (board[row, col].BoobyTrapped) return Square.mineValue;
 
-            for (int i = -1; i < 2; i++)
-            {
-                for (int j = -1; j < 2; j++)
-                {
-                    if (IsValid(row + i, col + j) && (board[row + i, col + j].BoobyTrapped))
-                    {
-                        numberOfMines++;
-                    }
-                }
-            }
+            if (row - 1 >= 0 && board[row - 1, col].BoobyTrapped) numberOfMines++;
+            if (row - 1 >= 0 && col - 1 >= 0 && board[row - 1, col - 1].BoobyTrapped) numberOfMines++;
+            if (row - 1 >= 0 && col + 1 < 10 && board[row - 1, col + 1].BoobyTrapped) numberOfMines++;
+            if (col - 1 >= 0 && board[row, col - 1].BoobyTrapped) numberOfMines++;
+            if (col + 1 < 10 && board[row, col + 1].BoobyTrapped) numberOfMines++;
+            if (row + 1 < 10 && col - 1 >= 0 && board[row + 1, col - 1].BoobyTrapped) numberOfMines++;
+            if (row + 1 < 10 && board[row + 1, col].BoobyTrapped) numberOfMines++;
+            if (row + 1 < 10 && col + 1 < 10 && board[row + 1, col + 1].BoobyTrapped) numberOfMines++;
             return numberOfMines;
         }
+
+
 
 
         // Försök flagga en ruta. Returnerar false om ogiltigt drag, annars true.
         public bool TryFlag(int row, int col)
         {
-            if (!board[row, col].IsFlagged && !(flagCount >= 20))
+            if (!(flagCount >= 25))
             {
                 flagCount++;
                 board[row, col].TryFlag();
@@ -93,25 +95,77 @@ namespace MineSweeper
             return false;
         }
 
+
         public bool TryReveal(int row, int col)
         {
-            if (!board[row, col].IsRevealed)
+            if (IsValid(row, col) || !board[row, col].IsRevealed)
             {
+                if ( Helper.BoobyTrapped(row, col) == true)
+                {
+                    board[row, col].TryReveal();
+                    for(int i = 0; i < 10; i++)
+                    {
+                        for(int j = 0; j < 10; j++)
+                        {
+                            board[i,j].GameOver = true;
+                        }
+
+                    }
+                    
+                    gameOver = true;
+                }
+                else 
                 if (board[row, col].TryReveal() && board[row, col].Symbol == (char)Square.GameSymbol.SweepedZeroCloseMine)
                 {
-                    for (int i = -1; i < 2; i++)
+
+                    if ((row + 1 < 10) && !board[row + 1, col].IsRevealed) TryReveal(row + 1, col);
+                    if ((row + 1 < 10 && col + 1 < 10) && !board[row + 1, col + 1].IsRevealed) TryReveal(row + 1, col + 1);
+                    if ((row + 1 < 10 && col - 1 >= 0) && !board[row + 1, col - 1].IsRevealed) TryReveal(row + 1, col - 1);
+                    if ((col + 1 < 10) && !board[row, col + 1].IsRevealed) TryReveal(row, col + 1);
+                    if ((col - 1 >= 0) && !board[row, col - 1].IsRevealed) TryReveal(row, col - 1);
+                    if ((row - 1 >= 0 && col + 1 < 10) && !board[row - 1, col + 1].IsRevealed) TryReveal(row - 1, col + 1);
+                    if ((row - 1 >= 0 && col - 1 >= 0) && !board[row - 1, col - 1].IsRevealed) TryReveal(row - 1, col - 1);
+                    if ((row - 1 >= 0) && !board[row - 1, col].IsRevealed) TryReveal(row - 1, col);
+
+                }
+                playerWon = true;
+                for(int i = 0; i < 10; i++)
+                {
+                    for(int j = 0; j < 10; j++)
                     {
-                        for (int j = -1; j < 2; j++)
+                        if (board[i, j].IsRevealed == false && board[i,j].BoobyTrapped == false)
                         {
-                            if (IsValid(row + i, col + j) && (!board[row + i, col + j].IsRevealed))
-                                TryReveal(row + i, col + j);
-                        }
+                            playerWon = false;
+                        } 
                     }
-                    sweepedCount++;
                 }
             }
             return false;
         }
+
+
+
+        //Används inte för tillfället
+        public void revealsquare(int row, int col)
+        {
+            if (IsValid(row, col) && !board[row, col].IsRevealed)
+            {
+                board[row, col].TryReveal();
+                if ((row + 1 < 10) && !board[row + 1, col].IsRevealed && board[row + 1, col].BoobyTrapped) revealsquare(row + 1, col);
+                if ((row + 1 < 10 && col + 1 < 10) && !board[row + 1, col + 1].IsRevealed && board[row + 1, col + 1].BoobyTrapped) revealsquare(row + 1, col + 1);
+                if ((row + 1 < 10 && col - 1 >= 0) && !board[row + 1, col - 1].IsRevealed && board[row + 1, col - 1].BoobyTrapped) revealsquare(row + 1, col - 1);
+                if ((col + 1 < 10) && !board[row, col + 1].IsRevealed && board[row, col + 1].BoobyTrapped) revealsquare(row, col + 1);
+                if ((col - 1 >= 0) && !board[row, col - 1].IsRevealed && board[row, col - 1].BoobyTrapped) revealsquare(row, col - 1);
+                if ((row - 1 >= 0 && col + 1 < 10) && !board[row - 1, col + 1].IsRevealed && board[row - 1, col + 1].BoobyTrapped) revealsquare(row - 1, col + 1);
+                if ((row - 1 >= 0 && col - 1 >= 0) && !board[row - 1, col - 1].IsRevealed && board[row - 1, col - 1].BoobyTrapped) revealsquare(row - 1, col - 1);
+                if ((row - 1 >= 0) && !board[row - 1, col].IsRevealed && !board[row - 1, col].BoobyTrapped) revealsquare(row - 1, col);
+            }
+        }
+
+
+
+
+
 
 
 

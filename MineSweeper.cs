@@ -120,6 +120,14 @@ namespace MineSweeper
                 {
                     board.TryReveal(row, col);
                     board.Print();
+                    if (board.GameOver)
+                    {
+                        System.Console.WriteLine("GAME OVER!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    }
+                    if (board.PlayerWon)
+                    {
+                        System.Console.WriteLine("WELL DONE!");
+                    }
                     continue;
                 }
                 if (command == "f")

@@ -122,21 +122,24 @@ namespace MineSweeper
                     board.Print();
                     if (board.GameOver)
                     {
+                        System.Console.WriteLine();
                         System.Console.WriteLine("GAME OVER!");
                     }
                     if (board.PlayerWon)
                     {
+                        System.Console.WriteLine();
                         System.Console.WriteLine("WELL DONE!");
                     }
                     continue;
                 }
                 if (command == "f")
                 {
-                    board.TryFlag(row, col);
-                    board.Print();
+                    if (board.TryFlag(row, col))
+                    {
+                        board.Print();
+                    }
                     continue;
                 }
-
             }
         }
     }

@@ -24,7 +24,6 @@ namespace MineSweeper
         private int closeMineCount; // Antal minor på intilliggande rutor
         private bool flagged, boobyTrapped, sweeped;
         private char symbol;
-        public static int mineValue = -1;
 
 
         // Konstruktor som initierar en ny ruta på spelplanen.
@@ -94,16 +93,6 @@ namespace MineSweeper
             closeMineCount++;
         }
 
-        public bool IsMine()
-        {
-            if (boobyTrapped)
-            {
-                symbol = (char)GameOverSymbol.Mine;
-                return true;
-            }
-            return false;
-
-        }
 
         // Försök att flagga rutan. Returnerar false om ogiltigt drag, annars true.
         public bool TryFlag()
@@ -126,7 +115,7 @@ namespace MineSweeper
                     flagged = true;
                     symbol = (char)GameSymbol.Flagged;
                 }
-                
+
                 return true;
 
             }

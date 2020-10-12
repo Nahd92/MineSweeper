@@ -84,8 +84,6 @@ namespace MineSweeper
         }
 
 
-
-
         // Försök flagga en ruta. Returnerar false om ogiltigt drag, annars true.
         public bool TryFlag(int row, int col)
         {
@@ -98,28 +96,49 @@ namespace MineSweeper
         }
 
 
+        private void BoobyTrappedAndGameOver(int row, int col)
+        {
+            board[row, col].TryReveal();
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    board[i, j].GameOver = true;
+                }
+            }
+            gameOver = true;
+        }
+
+
+        private void PlayerWonAndGameEnd(int row, int col)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    if (board[i, j].IsRevealed == false && board[i, j].BoobyTrapped == false)
+                    {
+                        playerWon = false;
+                    }
+                }
+            }
+        }
+
+
+
+
+
         public bool TryReveal(int row, int col)
         {
             if (IsValid(row, col) || !board[row, col].IsRevealed)
             {
                 if (Helper.BoobyTrapped(row, col) == true)
                 {
-                    board[row, col].TryReveal();
-                    for (int i = 0; i < 10; i++)
-                    {
-                        for (int j = 0; j < 10; j++)
-                        {
-                            board[i, j].GameOver = true;
-                        }
-
-                    }
-
-                    gameOver = true;
+                    BoobyTrappedAndGameOver(row, col);
                 }
                 else
-                if (board[row, col].TryReveal() && board[row, col].Symbol == (char)Square.GameSymbol.SweepedZeroCloseMine)
+                    if (board[row, col].TryReveal() && board[row, col].Symbol == (char)Square.GameSymbol.SweepedZeroCloseMine)
                 {
-
                     for (int i = -1; i < 2; i++)
                     {
                         for (int j = -1; j < 2; j++)
@@ -128,22 +147,13 @@ namespace MineSweeper
                                 TryReveal(row + i, col + j);
                         }
                     }
-
                 }
                 playerWon = true;
-                for (int i = 0; i < 10; i++)
-                {
-                    for (int j = 0; j < 10; j++)
-                    {
-                        if (board[i, j].IsRevealed == false && board[i, j].BoobyTrapped == false)
-                        {
-                            playerWon = false;
-                        }
-                    }
-                }
+                PlayerWonAndGameEnd(row, col);
             }
             return false;
         }
+
 
 
 

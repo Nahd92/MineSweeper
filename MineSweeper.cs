@@ -10,13 +10,14 @@ namespace MineSweeper
         private static Board board;
         private bool quit;
         private Square square;
-
+        private int status;
         // Konstruktor som initierare ett nytt spel med en slumpmässig spelplan.
 
         public MineSweeper(string[] args)
         {
             board = new Board(args);
             quit = false;
+            status = 0;
             square = new Square(isBoobyTrapped: true);
 
         }
@@ -92,7 +93,7 @@ namespace MineSweeper
         // - Spelaren avslutade spelet med kommandot 'q'.
         // - Spelaren förlorade spelet genom att röja en minerad ruta. 
         // - Spelaren vann spelet genom att alla ej minerade rutor är röjda.
-        public void Run() // Stubbe
+        public int Run() // Stubbe
         {
             Console.WriteLine();
             Console.Clear();
@@ -107,7 +108,8 @@ namespace MineSweeper
                 if (input.Length == 1)
                 {
                     quit = true;
-                    break;
+                    status = 2;
+                    return status;
                 }
 
                 var command = input[0].ToString();
@@ -124,11 +126,13 @@ namespace MineSweeper
                     {
                         System.Console.WriteLine();
                         System.Console.WriteLine("GAME OVER!");
+                        status = 1;
                     }
                     if (board.PlayerWon)
                     {
                         System.Console.WriteLine();
                         System.Console.WriteLine("WELL DONE!");
+                        status = 0;
                     }
                     continue;
                 }
@@ -141,6 +145,7 @@ namespace MineSweeper
                     continue;
                 }
             }
+            return status;
         }
     }
 }

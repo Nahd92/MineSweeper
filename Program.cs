@@ -9,11 +9,10 @@ namespace MineSweeper
     class Program
     {
 
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             MineSweeper game = new MineSweeper(args);
-
-            game.Run();
+            return game.Run();
 
 
         }

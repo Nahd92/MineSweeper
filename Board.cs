@@ -12,7 +12,7 @@ namespace MineSweeper
     struct Board
     {
         Square[,] board;
-        private int flagCount, sweepedCount;
+        private int flagCount;
         private bool gameOver;
         private bool playerWon;
         // Konstruktor som initaliserar en ny spelplan.
@@ -20,7 +20,6 @@ namespace MineSweeper
         {
             board = new Square[10, 10];
             flagCount = 0;
-            sweepedCount = 0;
             gameOver = false;
             playerWon = false;
 

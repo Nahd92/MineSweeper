@@ -65,25 +65,24 @@ namespace MineSweeper
             {
                 if (value)
                 {
-                    if (flagged && boobyTrapped)
+                    if (boobyTrapped)
                     {
-                        symbol = (char)GameOverSymbol.FlaggedMine;
+                        symbol = (char)GameOverSymbol.Mine;
                     }
                     if (sweeped && boobyTrapped)
                     {
                         symbol = (char)GameOverSymbol.ExplodedMine;
                     }
-                    if (boobyTrapped && !sweeped)
-                    {
-                        symbol = (char)GameOverSymbol.Mine;
-                    }
                     if (flagged && !boobyTrapped)
                     {
                         symbol = (char)GameOverSymbol.MisplacedFlag;
                     }
+                    if (flagged && boobyTrapped && !sweeped)
+                    {
+                        symbol = (char)GameOverSymbol.FlaggedMine;
+                    }
                 }
             }
-
         }
 
 

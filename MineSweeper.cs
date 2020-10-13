@@ -108,8 +108,7 @@ namespace MineSweeper
                 if (input.Length == 1)
                 {
                     quit = true;
-                    status = 2;
-                    return status;
+                    return status = 2;
                 }
 
                 var command = input[0].ToString();
@@ -118,21 +117,27 @@ namespace MineSweeper
                 var row = int.Parse(input[3].ToString());
 
 
+
+
                 if (command == "r")
                 {
-                    board.TryReveal(row, col);
-                    board.Print();
+                    if (board.TryReveal(row, col))
+                    {
+                        board.Print();
+                    }
+
                     if (board.GameOver)
                     {
-                        System.Console.WriteLine();
-                        System.Console.WriteLine("GAME OVER!");
-                        status = 1;
+                        Console.WriteLine();
+                        Console.WriteLine("GAME OVER!");
+                        return status = 1;
+
                     }
                     if (board.PlayerWon)
                     {
-                        System.Console.WriteLine();
-                        System.Console.WriteLine("WELL DONE!");
-                        status = 0;
+                        Console.WriteLine();
+                        Console.WriteLine("WELL DONE!");
+                        return status = 0;
                     }
                     continue;
                 }
@@ -142,11 +147,12 @@ namespace MineSweeper
                     {
                         board.Print();
                     }
-                    continue;
                 }
             }
-            return status;
+            return 0;
         }
     }
 }
+
+
 

@@ -84,9 +84,10 @@ namespace MineSweeper
         }
 
 
+        // Försök flagga en ruta. Returnerar false om ogiltigt drag, annars true.
         public bool TryFlag(int row, int col)
         {
-            if ((flagCount < 25) && !board[row, col].IsFlagged)
+            if ((flagCount < 25) && !board[row, col].IsFlagged && !board[row, col].IsRevealed)
             {
                 board[row, col].TryFlag();
                 flagCount++;
@@ -106,19 +107,20 @@ namespace MineSweeper
         }
 
 
-        private void BoobyTrappedAndGameOver(int row, int col)
+        public void BoobyTrappedAndGameOver(int row, int col)
         {
             board[row, col].TryReveal();
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
                 {
+                    if (!board[i, j].IsRevealed && (!board[i, j].BoobyTrapped) && (!board[i, j].IsFlagged))
+                        BoobyTrappedAndGameOver(i, j);
                     board[i, j].GameOver = true;
                 }
             }
             gameOver = true;
         }
-
 
         private void PlayerWonAndGameEnd(int row, int col)
         {
@@ -140,9 +142,9 @@ namespace MineSweeper
 
         public bool TryReveal(int row, int col)
         {
-            if (IsValid(row, col) || !board[row, col].IsRevealed)
+            if (IsValid(row, col) && !board[row, col].IsRevealed)
             {
-                if (Helper.BoobyTrapped(row, col) == true)
+                if (board[row, col].BoobyTrapped)
                 {
                     BoobyTrappedAndGameOver(row, col);
                 }
@@ -157,11 +159,17 @@ namespace MineSweeper
                                 TryReveal(row + i, col + j);
                         }
                     }
+                    return true;
                 }
                 playerWon = true;
                 PlayerWonAndGameEnd(row, col);
             }
-            return false;
+            else
+            {
+                Console.WriteLine("not allowed");
+                return false;
+            }
+            return true;
         }
 
 

@@ -5,9 +5,8 @@ namespace MineSweeper
 {
     struct MineSweeper
     {
-        private static Board board;
+        private Board board;
         private bool quit;
-        private Square square;
         private int status;
         // Konstruktor som initierare ett nytt spel med en slumpmässig spelplan.
 
@@ -16,8 +15,6 @@ namespace MineSweeper
             board = new Board(args);
             quit = false;
             status = 0;
-            square = new Square(isBoobyTrapped: true);
-
         }
 
         // Läs ett nytt kommando från användaren med giltig syntax och 

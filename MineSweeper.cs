@@ -144,7 +144,7 @@ namespace MineSweeper
                     }
                 }
             }
-            return 0;
+            return status;
         }
     }
 }

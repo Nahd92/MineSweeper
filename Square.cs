@@ -76,10 +76,12 @@ namespace MineSweeper
                     if (flagged && !boobyTrapped)
                     {
                         symbol = (char)GameOverSymbol.MisplacedFlag;
+                        Console.OutputEncoding = System.Text.Encoding.UTF8;
                     }
                     if (flagged && boobyTrapped && !sweeped)
                     {
                         symbol = (char)GameOverSymbol.FlaggedMine;
+                        Console.OutputEncoding = System.Text.Encoding.UTF8;
                     }
                 }
             }
@@ -119,6 +121,7 @@ namespace MineSweeper
 
             }
         }
+
 
         // Försök röja rutan. Returnerar false om ogiltigt drag, annars true.
         public bool TryReveal()

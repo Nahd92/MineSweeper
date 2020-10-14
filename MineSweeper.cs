@@ -8,7 +8,7 @@ namespace MineSweeper
         private Board board;
         private bool quit;
         private int status;
-        // Konstruktor som initierare ett nytt spel med en slumpmässig spelplan.
+
 
         public MineSweeper(string[] args)
         {
